@@ -1,6 +1,8 @@
 <template>
-	<div>
-		Pagina nao encontrada
+	<div class="alert alert-danger">
+		<p>
+			Página não encontrada! <router-link to="/login/login">Ir para login</router-link>
+		</p>
 	</div>
 </template>
 
