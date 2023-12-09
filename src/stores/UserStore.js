@@ -14,7 +14,7 @@ export const userStore = createStore({
             state.token = token;
         },
         setUser(state, user){
-            state.id = id;
+            state.user = user;
         }
     },
     

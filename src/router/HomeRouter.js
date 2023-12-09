@@ -1,24 +1,24 @@
-import HomeLayout from "../layouts/HomeLayout.vue"
-import NotFoundView from "../views/NotFoundView.vue"
+import HomeLayout from "../Layouts/HomeLayout.vue"
+import NotFoundView from "../Views/NotFoundView.vue"
 
-const homeRouters = {
+const HomeRouter = {
 
   routers: [
     {
       path: "/",
-      name: "source",
+      name: "Source",
       redirect: () => "/login",
     },
     {
       path: "/home",
-      name: "home",
+      name: "Home",
       component: HomeLayout,
       redirect: () => "/login",
       
       children: [
         {
           path: 'notFound',
-          name: 'notFound',
+          name: 'NotFound',
           component: NotFoundView
         }
       ]
@@ -26,10 +26,10 @@ const homeRouters = {
   ],
   
   titles: {
-    "home": "Home",
-    "notFound": "Pagina não Encontrada"
+    "Home": "Home",
+    "NotFound": "Pagina não Encontrada"
   }
   
 };
 
-export { homeRouters };
+export { HomeRouter };

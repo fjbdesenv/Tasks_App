@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import AlertComponent from "@/components/AlertComponent.vue";
+import AlertComponent from "@/Components/AlertComponent.vue";
 
 export default {
 	name: 'NotFoundView',
