@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import { ApiTask } from '@/services/apiTask';
-import AlertComponent from '@/components/AlertComponent.vue';
+import { ApiTask } from '@/Services/ApiTask';
+import AlertComponent from '@/Components/AlertComponent.vue';
 import { mapMutations, mapGetters } from "vuex";
 
 export default {
