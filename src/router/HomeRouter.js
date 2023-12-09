@@ -1,5 +1,6 @@
-import HomeLayout from "../Layouts/HomeLayout.vue"
+import DefaultLayout from "../Layouts/DefaultLayout.vue"
 import NotFoundView from "../Views/NotFoundView.vue"
+import HomeView from "../Views/HomeView.vue"
 
 const HomeRouter = {
 
@@ -12,10 +13,15 @@ const HomeRouter = {
     {
       path: "/home",
       name: "Home",
-      component: HomeLayout,
-      redirect: () => "/login",
+      component: DefaultLayout,
+      redirect: () => "/home/home",
       
       children: [
+        {
+          path: 'home',
+          name: 'Home',
+          component: HomeView
+        },
         {
           path: 'notFound',
           name: 'NotFound',
