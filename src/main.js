@@ -1,10 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
-import { userStore } from "@/stores/UserStore"
+import router from './Router'
+import { userStore } from "@/Stores/UserStore"
 
 // CSS 
-import "./assets/css/style.css"
+import "./Assets/css/style.css"
 
 // Boostrap
 import "bootstrap/dist/css/bootstrap.css";

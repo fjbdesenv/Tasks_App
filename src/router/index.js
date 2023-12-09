@@ -1,24 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { homeRouters } from './home'
-import { loginRoutes } from './login'
-import { notFoundRouters } from './NotFound'
-import { tarefaRoutes } from './tarefas'
-import { usuarioRoutes } from './usuarios'
+import { HomeRouter } from './HomeRouter'
+import { LoginRouter } from './LoginRouter'
+import { NotFoundRouter } from './NotFoundRouter'
+import { TarefaRouter } from './TarefaRouter'
+import { UsuarioRouter } from './UsuarioRouter'
 
 const routes = [
-  ...homeRouters.routers,
-  ...loginRoutes.routers,
-  ...usuarioRoutes.routers,
-  ...tarefaRoutes.routers,
-  ...notFoundRouters.routers
+  ...HomeRouter.routers,
+  ...LoginRouter.routers,
+  ...UsuarioRouter.routers,
+  ...TarefaRouter.routers,
+  ...UsuarioRouter.routers,
+  ...NotFoundRouter.routers
 ]
 
 const PAGE_TITLE = {
-  ...homeRouters.titles,
-  ...loginRoutes.titles,
-  ...usuarioRoutes.titles,
-  ...tarefaRoutes.titles,
-  ...notFoundRouters.titles
+  ...HomeRouter.titles,
+  ...LoginRouter.titles,
+  ...UsuarioRouter.titles,
+  ...TarefaRouter.titles,
+  ...NotFoundRouter.titles
 }
 
 const router = createRouter({

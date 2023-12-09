@@ -1,25 +1,25 @@
-import HomeLayout from "../layouts/HomeLayout.vue";
-import LoginView from "../views/LoginView.vue";
-import RegisterView from "../views/RegisterView.vue";
+import HomeLayout from "../Layouts/HomeLayout.vue";
+import LoginView from "../Views/LoginView.vue";
+import RegisterView from "../Views/RegisterView.vue";
 
-const loginRoutes = {
+const LoginRouter = {
   
   routers: [
     {
       path: "/login/",
-      name: "homelogin",
+      name: "Homelogin",
       redirect: () => "/login/login",
       component: HomeLayout,
   
       children: [
         {
           path: "login",
-          name: "login",
+          name: "Login",
           component: LoginView,
         },
         {
           path: "register",
-          name: "register",
+          name: "Register",
           component: RegisterView,
         },
       ],
@@ -27,10 +27,10 @@ const loginRoutes = {
   ],
 
   titles: {
-    "login": "Login",
-    "register": "Cadastro"
+    "Login": "Login",
+    "Register": "Cadastro"
   }
   
 };
 
-export { loginRoutes };
+export { LoginRouter };

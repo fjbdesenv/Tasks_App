@@ -1,4 +1,4 @@
-const notFoundRouters = {
+const NotFoundRouter = {
   routers:[
     {
       path: "/:pathMatch(.*)*",
@@ -11,4 +11,4 @@ const notFoundRouters = {
   }
 };
 
-export { notFoundRouters };
+export { NotFoundRouter };
