@@ -10,7 +10,8 @@ const routes = [
   ...LoginRouter.routers,
   ...UsuarioRouter.routers,
   ...TarefaRouter.routers,
-  ...UsuarioRouter.routers
+  ...UsuarioRouter.routers,
+  ...NotFoundRouter.routers
 ]
 
 const PAGE_TITLE = {
