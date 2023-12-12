@@ -31,7 +31,7 @@
 <script>
 import { ApiTask } from '@/Services/ApiTask';
 import AlertComponent from '@/Components/AlertComponent.vue';
-import { getLocal } from "../Utils"
+import { localGet } from "../Utils"
 
 export default {
   name: 'LoginView',
@@ -105,7 +105,7 @@ export default {
   },
 
   beforeMount(){
-    let token = getLocal('token');
+    let token = localGet('token');
     if(token){
       this.setToken(token);
       this.redirecionarHome();
