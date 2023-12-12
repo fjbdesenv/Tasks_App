@@ -33,7 +33,7 @@ router.afterEach((toRoute) => {
 })
 
 router.beforeEach((to, from, next) => {
-  if(!localGet('token') && to.path !== '/login/login') next({ path: '/login/login'});
+  if(!localGet('token') && to.path !== '/login/login' && to.path !== '/login/register') next({ path: '/login/login'});
   else next();
 })
 
