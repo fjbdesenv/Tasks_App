@@ -1,5 +1,7 @@
-import { getLocal } from "./getLocal";
+import { localGet, localClear, checkToken } from "./localData";
 
 export {
-    getLocal
+    localGet,
+    localClear,
+    checkToken
 }
