@@ -23,6 +23,10 @@
       </div>
 
       <button type="button" class="btn btn-primary my-2" @click="logar()">Logar</button>
+
+      <p class="mt-3">
+        Não tem conta? <router-link to="/login/register">registrar-se</router-link>
+      </p>
     </form>
 
   </div>
