@@ -14,6 +14,9 @@
                     <li class="nav-item">
                         <RouterLink to="/usuarios" class="nav-link">Usuários</RouterLink>
                     </li>
+                    <li class="nav-item">
+                        <RouterLink to="/login/login" @click="logout()" class="nav-link">Sair</RouterLink>
+                    </li>
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -25,7 +28,15 @@
 </template>
 
 <script>
+import { localClear } from "@/Utils"
+
 export default {
-    name: 'MenuComponent'
+    name: 'MenuComponent',
+    methods:{
+        logout(){
+            localClear();
+            window.location.href = '/login/login';
+        }
+    }
 }
 </script>

@@ -4,6 +4,7 @@ import { LoginRouter } from './LoginRouter'
 import { NotFoundRouter } from './NotFoundRouter'
 import { TarefaRouter } from './TarefaRouter'
 import { UsuarioRouter } from './UsuarioRouter'
+import { checkToken, localGet } from '@/Utils'
 
 const routes = [
   ...HomeRouter.routers,
@@ -28,8 +29,14 @@ const router = createRouter({
 })
 
 router.afterEach((toRoute) => {
-  window.document.title = PAGE_TITLE[toRoute.name]
+  window.document.title = PAGE_TITLE[toRoute.name];
 })
+
+router.beforeEach((to, from, next) => {
+  if(!localGet('token') && to.path !== '/login/login') next({ path: '/login/login'});
+  else next();
+})
+
 
 
 export default router
