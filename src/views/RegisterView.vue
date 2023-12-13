@@ -1,7 +1,8 @@
 <template>
-  <div class="container d-flex justify-content-center">
+  <div class="container d-flex flex-column justify-content-center">
 
-    <form class="bg-light border rounded-3 p-5 w-80">
+    <AlertComponentVue v-if="erro.valor" :tipo="erro.tipo" :texto="erro.message" />
+    <form class="bg-light border rounded-3 p-5 w-80" @submit.prevent="cadastrar()">
 
       <h3 class="text-center mb-2">Cadastro</h3>
 
@@ -49,16 +50,93 @@
 </template>
 
 <script>
+import AlertComponentVue from '@/Components/AlertComponent.vue';
+import { ApiTask } from "@/Services/ApiTask";
 
 export default {
   name: 'RegisterView',
+
   data: () => ({
     usuario: {
       nome: '',
       email: '',
       senha: '',
       senhaConfirmacao: ''
-    }
-  })
+    },
+    erro: {
+      valor: false,
+      message: '',
+      tipo: 'erro'
+    },
+  }),
+
+  components: {
+    AlertComponentVue
+  },
+
+  methods: {
+
+    cadastrar() {
+      if (this.validacao()) {
+        ApiTask.usuario.post({
+          nome: this.usuario.nome,
+          email: this.usuario.email,
+          senha: this.usuario.senha,
+          roles: ['ROLE_USER']
+        }).then(response => {
+          this.limparCampos();
+          this.showMessage('Usuário cadastrado com sucesso!', 'sucesso');
+        }).catch(error => {
+          console.error(error.message);
+          this.showMessage('Ocorreu algum erro ao cadastrar o registro, por favor tente novamente mais tarde.', 'erro');
+        });
+      }
+    },
+
+    validacao() {
+      let campo = '';
+      if (!this.usuario.nome) campo = 'Nome';
+      else if (!this.usuario.email) campo = 'Email';
+      else if (!this.usuario.senha) campo = 'Senha';
+      else if (!this.usuario.senhaConfirmacao) campo = 'Confirmação de senha';
+
+      if (campo) {
+        this.showMessage(`${campo} deve ser preenchido!`, 'erro');
+
+        return false;
+      }
+
+      if (this.usuario.senha !== this.usuario.senhaConfirmacao) {
+        this.showMessage('Senha e confirmação são diferentes!', 'erro');
+
+        return false;
+      }
+
+      return true;
+    },
+
+    showMessage(message, tipo) {
+
+      this.erro.valor = true;
+      this.erro.message = message;
+      this.erro.tipo = tipo;
+
+      setTimeout(() => {
+        this.erro.valor = false;
+        this.erro.message = '';
+      }, 5000);
+    },
+    
+    limparCampos() {
+      this.usuario = {
+        nome: '',
+        email: '',
+        senha: '',
+        senhaConfirmacao: ''
+      }
+    },
+
+  }
+
 }
 </script>
