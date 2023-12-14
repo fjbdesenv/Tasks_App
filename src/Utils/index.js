@@ -1,4 +1,4 @@
-import { localGet, localClear, checkToken } from "./localData";
+import { localGet, localClear, checkToken } from "./LocalData";
 
 export {
     localGet,
