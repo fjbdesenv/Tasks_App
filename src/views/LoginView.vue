@@ -55,9 +55,9 @@ export default {
       ApiTask.auth({ email: this.email, senha: this.password })
         .then((response) => {
           try {
-            let token = response.data.token;
+            let user_data = response.data;
 
-            this.setToken(token);
+            this.setLocalUser(user_data);
             this.redirecionarHome();
 
           } catch (error) { throw error };
@@ -76,14 +76,14 @@ export default {
         })
     },
 
-    setToken(token) {
+    setLocalUser(user_data) {
       if (this.manterConectado) {
         // Salva token no localStorege
-        localStorage.setItem('token', token);
+        localStorage.setItem('user_data', user_data);
       } else {
         // Salva token na sessionStorage
-        localStorage.removeItem('token');
-        sessionStorage.setItem('token', token);
+        localStorage.removeItem('user_data');
+        sessionStorage.setItem('user_data', user_data);
       }
     },
 
@@ -109,9 +109,9 @@ export default {
   },
 
   beforeMount(){
-    let token = localGet('token');
-    if(token){
-      this.setToken(token);
+    let user_data = localGet('user_data');
+    if(user_data){
+      this.setLocalUser(user_data);
       this.redirecionarHome();
     }
   }
