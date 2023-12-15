@@ -4,7 +4,7 @@ import { LoginRouter } from './LoginRouter'
 import { NotFoundRouter } from './NotFoundRouter'
 import { TarefaRouter } from './TarefaRouter'
 import { UsuarioRouter } from './UsuarioRouter'
-import { checkToken, localGet } from '@/Utils'
+import { Sessao, Storage } from '@/Utils'
 
 const routes = [
   ...HomeRouter.routers,
@@ -33,7 +33,11 @@ router.afterEach((toRoute) => {
 })
 
 router.beforeEach((to, from, next) => {
-  if(!localGet('token') && to.path !== '/login/login' && to.path !== '/login/register') next({ path: '/login/login'});
+  if(
+    !(Storage.user || Sessao.user) 
+    && to.path !== '/login/login'
+    && to.path !== '/login/register'
+  ) next({ path: '/login/login'});
   else next();
 })
 

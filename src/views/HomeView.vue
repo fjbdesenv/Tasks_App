@@ -47,3 +47,10 @@ export default {
     })
 }
 </script>
+
+<style scoped>
+.carousel-item{
+    max-height: 600px;
+    max-width: 1000px;
+}
+</style>

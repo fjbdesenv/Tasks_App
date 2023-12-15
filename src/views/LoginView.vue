@@ -25,7 +25,7 @@
       <button type="button" class="btn btn-primary my-2" @click="logar()">Logar</button>
 
       <p class="mt-3">
-        Não tem conta? <router-link to="/login/register">registrar-se</router-link>
+        Não tem conta? <router-link to="/login/register">Registrar-se</router-link>
       </p>
     </form>
 
@@ -35,7 +35,7 @@
 <script>
 import { ApiTask } from '@/Services/ApiTask';
 import AlertComponent from '@/Components/AlertComponent.vue';
-import { localGet } from "../Utils"
+import { Sessao, Storage, Redirect } from "../Utils"
 
 export default {
   name: 'LoginView',
@@ -55,16 +55,14 @@ export default {
       ApiTask.auth({ email: this.email, senha: this.password })
         .then((response) => {
           try {
-            let token = response.data.token;
+            let user_data = response.data;
 
-            this.setToken(token);
-            this.redirecionarHome();
+            this.setUser(user_data);
+            Redirect.home();
 
           } catch (error) { throw error };
-
         })
         .catch((error) => {
-
           if (error.request && error.request.status == 401) {
             // Erro de autenticação
             this.messageErro(401);
@@ -72,36 +70,27 @@ export default {
             // Erro no servidor de autenticação
             this.messageErro(500);
           }
-
         })
     },
 
-    setToken(token) {
+    setUser(user_data) {
       if (this.manterConectado) {
-        // Salva token no localStorege
-        localStorage.setItem('token', token);
+        Sessao.clear();
+        Storage.user = user_data;
       } else {
-        // Salva token na sessionStorage
-        localStorage.removeItem('token');
-        sessionStorage.setItem('token', token);
+        Storage.clear();
+        Sessao.user = user_data;
       }
     },
 
-    redirecionarHome(){
-      window.location.href = '/home/home';
-    },
-
     messageErro(statusCode) {
-
       this.erro.status = statusCode;
 
       setTimeout(() => {
         // Mostrar mensagem de erro por alguns segundos
         this.erro.status = 0;
       }, 5000)
-
     },
-
   },
 
   components: {
@@ -109,11 +98,7 @@ export default {
   },
 
   beforeMount(){
-    let token = localGet('token');
-    if(token){
-      this.setToken(token);
-      this.redirecionarHome();
-    }
+    if(Storage.user || Sessao.user) Redirect.home(); 
   }
 }
 </script>
