@@ -28,14 +28,15 @@
 </template>
 
 <script>
-import { localClear } from "@/Utils"
+import { Sessao, Storage, Redirect } from "@/Utils"
 
 export default {
     name: 'MenuComponent',
     methods:{
         logout(){
-            localClear();
-            window.location.href = '/login/login';
+            Sessao.clear();
+            Storage.clear();
+            Redirect.login();
         }
     }
 }
