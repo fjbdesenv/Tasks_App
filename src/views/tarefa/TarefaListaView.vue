@@ -27,7 +27,7 @@ export default {
     CardTarefaComponent
   },
   beforeMount() {
-    ApiTask.usuario.tarefas.getAll(1)
+    ApiTask.usuario.tarefas.getAll(20)
       .then(response => this.listaTarefas = response.data)
       .catch(error => console.error(error.message));
   }

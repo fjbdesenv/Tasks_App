@@ -1,7 +1,11 @@
-import { localGet, localClear, checkToken } from "./LocalData";
+import { Sessao } from "./Sessao";
+import { Storage } from "./Storage";
+import { Redirect } from "./Redirect";
+import { Headers } from "./Header";
 
 export {
-    localGet,
-    localClear,
-    checkToken
+    Sessao,
+    Storage,
+    Redirect,
+    Headers
 }
