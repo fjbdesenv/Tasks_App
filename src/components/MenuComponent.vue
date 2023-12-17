@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav id="top" class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <RouterLink to="/home/home" class="navbar-brand">Home</RouterLink>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
