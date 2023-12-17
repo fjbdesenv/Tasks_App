@@ -48,7 +48,7 @@ export default {
             this.deletado = true;
             window.location.href = '#top';
             
-            AsycTime(true, 5000).then(response => {
+            AsycTime(false, 3000).then(response => {
               this.deletado = response;
             });
             

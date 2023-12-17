@@ -86,7 +86,7 @@ export default {
     messageErro(statusCode) {
       this.erro.status = statusCode;
       
-      AsycTime(0, 5000).then(response => {
+      AsycTime(0, 3000).then(response => {
         this.deletado = response;
       });
     },
