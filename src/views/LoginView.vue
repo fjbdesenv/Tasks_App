@@ -85,11 +85,10 @@ export default {
 
     messageErro(statusCode) {
       this.erro.status = statusCode;
-
-      setTimeout(() => {
-        // Mostrar mensagem de erro por alguns segundos
-        this.erro.status = 0;
-      }, 5000)
+      
+      AsycTime(0, 5000).then(response => {
+        this.deletado = response;
+      });
     },
   },
 

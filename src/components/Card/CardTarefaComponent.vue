@@ -8,8 +8,8 @@
             <p class="card-text">Início: {{ horarioInicio }}</p>
             <p class="card-text">Fim: {{ horarioFim }}</p>
             <p class="card-text">Status: {{ statusNome }}</p>
-            <router-link to="/tarefas/edicao/1"><button class="btn btn-primary">Editar</button></router-link>
-            <button class="btn btn-danger mx-2">Deletar</button>
+            <router-link :to="URLEdicao"><button class="btn btn-primary">Editar</button></router-link>
+            <button class="btn btn-danger mx-2" @click="deletar(id)" >Deletar</button>
         </div>
     </div>
 </template>
@@ -23,6 +23,10 @@ export default {
         ImageTarefa
     }),
     props: {
+        id: {
+            type: Number,
+            required: true
+        }, 
         titulo: {
             type: String,
             required: true
@@ -48,6 +52,11 @@ export default {
             required: true
         },  
     },
+    methods:{
+        deletar(){
+            this.$emit('deletarTarefa', this.id)
+        }
+    },
     computed:{
         statusNome(){
             let aux = '';
@@ -63,7 +72,10 @@ export default {
                     break; 
             }
             return aux;
+        },
+        URLEdicao(){
+            return "/tarefas/edicao/" + this.id
         }
-    }
+    },
 }
 </script>
