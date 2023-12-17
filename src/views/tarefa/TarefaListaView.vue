@@ -25,7 +25,7 @@
 import AlertComponent from "@/Components/AlertComponent.vue";
 import CardTarefaComponent from "@/Components/Card/CardTarefaComponent";
 import { ApiTask } from "@/Services/ApiTask";
-import { Storage, Sessao } from "@/Utils";
+import { Storage, Sessao, AsycTime } from "@/Utils";
 
 export default {
   name: 'TarefaListaView',
@@ -48,10 +48,10 @@ export default {
             this.deletado = true;
             window.location.href = '#top';
             
-            setTimeout(() => {
-              this.deletado = false;
-            }, 5000);
-
+            AsycTime(true, 5000).then(response => {
+              this.deletado = response;
+            });
+            
           })
           .catch(error => console.error(error.message));
       }
