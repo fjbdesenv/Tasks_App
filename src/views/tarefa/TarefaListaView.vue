@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <Router-link to="/tarefas/cadastro">
+      <button class="btn btn-success mt-3"> Nova tarefa </button>
+    </Router-link>
     <AlertComponent 
       v-if="mensagem.status" 
       :tipo="mensagem.tipo" 
