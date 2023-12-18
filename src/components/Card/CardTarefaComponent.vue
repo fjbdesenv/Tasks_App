@@ -8,7 +8,7 @@
             <p class="card-text">Início: {{ horarioInicio }}</p>
             <p class="card-text">Fim: {{ horarioFim }}</p>
             <p class="card-text">Status: {{ statusNome }}</p>
-            <router-link :to="URLEdicao"><button class="btn btn-primary">Editar</button></router-link>
+            <router-link :to="URLEdicao"><button class="btn btn-primary mx-2">Editar</button></router-link>
             <button class="btn btn-danger mx-2" @click="deletar(id)" >Deletar</button>
         </div>
     </div>
