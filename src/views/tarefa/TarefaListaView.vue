@@ -1,7 +1,10 @@
 <template>
   <div class="container">
+    <Router-link to="/tarefas/cadastro">
+      <button class="btn btn-success mt-3"> Nova tarefa </button>
+    </Router-link>
     <AlertComponent 
-      v-if="mensagem.status" 
+      v-if="mensagem.show" 
       :tipo="mensagem.tipo" 
       :texto="mensagem.texto" 
     />
@@ -38,7 +41,7 @@ export default {
     user: undefined,
     listaTarefas: [],
     mensagem: {
-      status: false,
+      show: false,
       tipo: 'sucesso',
       texto: ''
     },
@@ -75,11 +78,11 @@ export default {
 
     setMensagem(texto, tipo, time){
       window.location.href = '#top';
-      this.mensagem = { status: true, tipo, texto };
+      this.mensagem = { show: true, tipo, texto };
       
       if(time){
         AsycTime(false, 3000).then(response => {
-          this.mensagem.status = response;
+          this.mensagem.show = response;
         });
       }
     }
