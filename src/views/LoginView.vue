@@ -1,8 +1,7 @@
 <template>
   <div class="container">
 
-    <AlertComponent tipo="erro" texto="Email ou senha incorretos!" v-if="erro.status === 401" />
-    <AlertComponent tipo="erro" texto="Erro inesperado tente novamente mais tarde!" v-if="erro.status === 500" />
+    <AlertComponent :tipo="mensagem.tipo" :texto="mensagem.texto" v-if="mensagem.show" />
 
     <form class="container border rounded-3 bg-light p-3 w-50">
       <h3 class="text-center mb-2">Login</h3>
@@ -35,7 +34,7 @@
 <script>
 import { ApiTask } from '@/Services/ApiTask';
 import AlertComponent from '@/Components/AlertComponent.vue';
-import { Sessao, Storage, Redirect } from "../Utils"
+import { Sessao, Storage, Redirect, AsycTime } from "../Utils"
 
 export default {
   name: 'LoginView',
@@ -43,8 +42,10 @@ export default {
     email: '',
     password: '',
     manterConectado: true,
-    erro: {
-      status: 0
+    mensagem: {
+      tipo: 'erro',
+      show: false,
+      texto: ''
     }
   }),
   methods: {
@@ -84,10 +85,14 @@ export default {
     },
 
     messageErro(statusCode) {
-      this.erro.status = statusCode;
+      this.mensagem.tipo = 'erro';
+
+      if(statusCode == 401) this.mensagem.texto = 'Email ou senha incorretos!';
+      else if(statusCode == 500) this.mensagem.texto = 'Erro inesperado tente novamente mais tarde!'
       
-      AsycTime(0, 3000).then(response => {
-        this.deletado = response;
+      this.mensagem.show = true;
+      AsycTime(false, 3000).then(response => {
+        this.mensagem.show = response;
       });
     },
   },
