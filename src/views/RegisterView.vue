@@ -1,7 +1,8 @@
 <template>
   <div class="container d-flex flex-column justify-content-center">
 
-    <AlertComponentVue v-if="erro.valor" :tipo="erro.tipo" :texto="erro.message" />
+    <AlertComponentVue v-if="mensagem.show" :tipo="mensagem.tipo" :texto="mensagem.texto" />
+    
     <form class="bg-light border rounded-3 p-5 w-80" @submit.prevent="cadastrar()">
 
       <h3 class="text-center mb-2">Cadastro</h3>
@@ -52,6 +53,7 @@
 <script>
 import AlertComponentVue from '@/Components/AlertComponent.vue';
 import { ApiTask } from "@/Services/ApiTask";
+import { AsycTime } from '@/Utils';
 
 export default {
   name: 'RegisterView',
@@ -63,10 +65,10 @@ export default {
       senha: '',
       senhaConfirmacao: ''
     },
-    erro: {
-      valor: false,
-      message: '',
-      tipo: 'erro'
+    mensagem: {
+      show: false,
+      tipo: '',
+      texto: ''
     },
   }),
 
@@ -102,29 +104,20 @@ export default {
 
       if (campo) {
         this.showMessage(`${campo} deve ser preenchido!`, 'erro');
-
         return false;
       }
 
       if (this.usuario.senha !== this.usuario.senhaConfirmacao) {
         this.showMessage('Senha e confirmação são diferentes!', 'erro');
-
         return false;
       }
 
       return true;
     },
 
-    showMessage(message, tipo) {
-
-      this.erro.valor = true;
-      this.erro.message = message;
-      this.erro.tipo = tipo;
-
-      setTimeout(() => {
-        this.erro.valor = false;
-        this.erro.message = '';
-      }, 5000);
+    async showMessage(texto, tipo) {
+      this.mensagem = { show: true, tipo, texto };
+      this.mensagem.show = await AsycTime(false);
     },
     
     limparCampos() {

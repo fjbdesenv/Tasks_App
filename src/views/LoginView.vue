@@ -64,13 +64,10 @@ export default {
           } catch (error) { throw error };
         })
         .catch((error) => {
-          if (error.request && error.request.status == 401) {
-            // Erro de autenticação
-            this.messageErro(401);
-          } else {
-            // Erro no servidor de autenticação
-            this.messageErro(500);
-          }
+          console.log(error.message);
+          error.request && error.request.status == 401 ? 
+            this.messageErro(401)
+            : this.messageErro(500);
         })
     },
 
@@ -85,15 +82,13 @@ export default {
     },
 
     messageErro(statusCode) {
-      this.mensagem.tipo = 'erro';
+      if(statusCode == 401)  this.showMessage('Email ou senha incorretos!', 'erro')
+      else if(statusCode == 500) this.showMessage('Erro inesperado tente novamente mais tarde!', 'erro');
+    },
 
-      if(statusCode == 401) this.mensagem.texto = 'Email ou senha incorretos!';
-      else if(statusCode == 500) this.mensagem.texto = 'Erro inesperado tente novamente mais tarde!'
-      
-      this.mensagem.show = true;
-      AsycTime(false, 3000).then(response => {
-        this.mensagem.show = response;
-      });
+    async showMessage(texto, tipo) {
+      this.mensagem = { show: true, tipo, texto };
+      this.mensagem.show = await AsycTime(false);
     },
   },
 
