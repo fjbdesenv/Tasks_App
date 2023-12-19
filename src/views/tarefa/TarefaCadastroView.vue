@@ -63,7 +63,10 @@ export default {
         campo = 'horário Inicial';
       else if (this.tarefa.horarioFim === '00:00')
         campo = 'horário Final';
-      else return true;
+      else{
+        this.tarefa.data = this.formatDate(this.tarefa.data);
+        return true;
+      };
 
       if (campo) {
         this.showMessage(`Campo ${campo} não foi preenchido`, 'erro');
@@ -87,6 +90,11 @@ export default {
         horarioInicio: "00:00",
         horarioFim: "00:00"
       }
+    },
+    
+    formatDate(data){
+      const aux = new Date(data.toString());
+      return `${aux.getFullYear()}-${aux.getMonth()}-${aux.getDay()}`;
     }
   }
 }
