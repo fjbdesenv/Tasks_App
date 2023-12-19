@@ -28,10 +28,10 @@
         <div v-if="operacao === 'edicao'" class="input-group mb-3">
           <span class="input-group-text"> Status </span>
           <select v-model="tarefa.status" class="form-select">
-            <option value="0" disabled> Selecione uma opção </option>
-            <option value="1"> Não iniciada </option>
-            <option value="2"> Em execução </option>
-            <option value="3"> Finalizada </option>
+            <option :value="0" disabled> Selecione uma opção </option>
+            <option :value="1"> Não iniciada </option>
+            <option :value="2"> Em execução </option>
+            <option :value="3"> Finalizada </option>
           </select>
         </div>
 
