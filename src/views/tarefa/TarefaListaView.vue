@@ -53,13 +53,14 @@ export default {
         const idUser = this.user.id;
 
         ApiTask.usuario.tarefas.delete(idUser, idTask)
-          .then(response =>{
-            
-            this.setMensagem('Deletado com sucesso!', 'sucesso', true);
+          .then(response =>{   
+            this.showMessage('Deletado com sucesso!', 'sucesso');
             this.getLista();
-            
           })
-          .catch(error => console.error(error.message));
+          .catch(error =>{
+            console.error(error.message);
+            this.showMessage('Erro inesperado tente novamente mais tarde!', 'erro');
+          });
       }
     },
 
@@ -76,16 +77,11 @@ export default {
       
     },
 
-    setMensagem(texto, tipo, time){
+    async showMessage(texto, tipo) {
       window.location.href = '#top';
       this.mensagem = { show: true, tipo, texto };
-      
-      if(time){
-        AsycTime(false, 3000).then(response => {
-          this.mensagem.show = response;
-        });
-      }
-    }
+      this.mensagem.show = await AsycTime(false);
+    },
   },
   components: {
     CardTarefaComponent,
