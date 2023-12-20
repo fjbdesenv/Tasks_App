@@ -1,7 +1,7 @@
 <template>
     <div>
     <div class="container">
-      <alert-component v-if="mensagem.show" :tipo="mensagem.tipo" :texto="mensagem.texto" />
+      <AlertComponent v-if="mensagem.show" :tipo="mensagem.tipo" :texto="mensagem.texto" />
     </div>
 
     <div class="container border rounded-3 bg-light p-3 mt-3 w-50">
