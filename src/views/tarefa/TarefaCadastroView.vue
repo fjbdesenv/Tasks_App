@@ -31,6 +31,7 @@ export default {
       texto: ''
     }
   }),
+  
   components: {
     FormTarefaComponent
   },
