@@ -49,19 +49,24 @@ export default {
 
   methods: {
     deletar(idTask) {
-      if (this.user) {
-        const idUser = this.user.id;
+      const confirmacao = confirm(`Deseja deletar a tarefa de código ${idTask}?`);
+        
+      if(confirmacao){
+        if (this.user) {
+          const idUser = this.user.id;
+  
+          ApiTask.usuario.tarefas.delete(idUser, idTask)
+            .then(response =>{   
+              this.showMessage('Deletado com sucesso!', 'sucesso');
+              this.getLista();
+            })
+            .catch(error =>{
+              console.error(error.message);
+              this.showMessage('Erro inesperado tente novamente mais tarde!', 'erro');
+            });
+        }
+      };
 
-        ApiTask.usuario.tarefas.delete(idUser, idTask)
-          .then(response =>{   
-            this.showMessage('Deletado com sucesso!', 'sucesso');
-            this.getLista();
-          })
-          .catch(error =>{
-            console.error(error.message);
-            this.showMessage('Erro inesperado tente novamente mais tarde!', 'erro');
-          });
-      }
     },
 
     getLista() {
