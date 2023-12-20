@@ -68,15 +68,23 @@ export default {
             this.showMessage('Erro inesperado tente novamente mais tarde!', 'erro');
           }); 
       },
-      
+
+      deletar(idUser) {
+        ApiTask.usuario.delete(idUser)
+          .then(response =>{   
+            this.showMessage('Deletado com sucesso!', 'sucesso');
+            this.getLista();
+          })
+          .catch(error =>{
+            console.error(error.message);
+            this.showMessage('Erro inesperado tente novamente mais tarde!', 'erro');
+          });
+      },
+
       async showMessage(texto, tipo) {
         this.mensagem = { show: true, tipo, texto };
         this.mensagem.show = await AsycTime(false);
       },
-
-      deletar(id){
-        //Code
-      }
   },
   
   beforeMount() {
