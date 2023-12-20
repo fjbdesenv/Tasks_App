@@ -44,7 +44,6 @@ export default {
   name: 'UsuarioListaView',
   
   data: () => ({
-      user: undefined,
       autenticado: false,
       listaUsuarios: [],
       mensagem: {
@@ -53,6 +52,7 @@ export default {
         texto: ''
       }
   }),
+
   components:{
     AlertComponent
   },
@@ -94,15 +94,15 @@ export default {
   },
   
   beforeMount() {
-      this.user = Storage.user || Sessao.user;
-      if (this.user) {
-          this.autenticado = this.user.roles.includes('ROLE_ADM');
-          if (!this.autenticado){
-            this.mensagem = { show: true, tipo:'info', texto:'Credênciais insuficientes para acesso!' };
-          }else{
-            this.getLista();
-          }
+    const user = Storage.user || Sessao.user;
+    if (user) {
+      this.autenticado = user.roles.includes('ROLE_ADM');
+      if (!this.autenticado){
+        this.mensagem = { show: true, tipo:'info', texto:'Credênciais insuficientes para acesso!' };
+      }else{
+        this.getLista();
       }
+    }
   }
 }
 </script>

@@ -4,7 +4,7 @@
       <AlertComponent v-if="mensagem.show" :tipo="mensagem.tipo" :texto="mensagem.texto" />
     </div>
 
-    <div class="container border rounded-3 bg-light p-3 mt-3 w-50">
+    <div v-if="autenticacao" class="container border rounded-3 bg-light p-3 mt-3 w-50">
 
       <form @submit.prevent="acao()">
 
@@ -79,6 +79,10 @@ export default {
       validator(value) {
         return (value == 'cadastro' || value == 'edicao')
       }
+    },
+    autenticacao:{
+      type: Boolean,
+      default: false
     }
   },
 

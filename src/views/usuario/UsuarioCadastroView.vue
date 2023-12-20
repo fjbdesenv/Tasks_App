@@ -1,6 +1,7 @@
 <template>
   <div>
     <FormUsuarioComponent
+      :autenticado="autenticado"
       :usuario="usuario" 
       :mensagem="mensagem" 
       operacao="cadastro"
@@ -18,6 +19,7 @@ export default {
     name: 'UsuarioCadastroView',
     
     data: ()=>({
+      autenticado: false,
       usuario: {
         nome: "",
         email: "",
@@ -28,7 +30,7 @@ export default {
         show: false,
         tipo: 'erro',
         texto: ''
-      }
+      },
     }),
     
     components: { FormUsuarioComponent },
@@ -79,6 +81,18 @@ export default {
         roles: []
       }
     },
+  },
+
+  beforeMount() {
+    const user = Storage.user || Sessao.user;
+    if (user) {
+      this.autenticado = user.roles.includes('ROLE_ADM');
+      if (!this.autenticado){
+        this.mensagem = { show: true, tipo:'info', texto:'Credênciais insuficientes para acesso!' };
+      }else{
+        this.getLista();
+      }
+    }
   }
 }
 </script>
