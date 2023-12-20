@@ -70,16 +70,22 @@ export default {
       },
 
       deletar(idUser) {
-        ApiTask.usuario.delete(idUser)
-          .then(response =>{   
-            this.showMessage('Deletado com sucesso!', 'sucesso');
-            this.getLista();
-          })
-          .catch(error =>{
-            console.error(error.message);
-            this.showMessage('Erro inesperado tente novamente mais tarde!', 'erro');
-          });
+        const confirmacao = confirm(`Deseja deletar o usuário de código ${idUser}?`);
+        
+        if(confirmacao){
+          ApiTask.usuario.delete(idUser)
+            .then(response =>{   
+              this.showMessage('Deletado com sucesso!', 'sucesso');
+              this.getLista();
+            })
+            .catch(error =>{
+              console.error(error.message);
+              this.showMessage('Erro inesperado tente novamente mais tarde!', 'erro');
+            });
+        };
+
       },
+        
 
       async showMessage(texto, tipo) {
         this.mensagem = { show: true, tipo, texto };
