@@ -89,8 +89,6 @@ export default {
       this.autenticado = user.roles.includes('ROLE_ADM');
       if (!this.autenticado){
         this.mensagem = { show: true, tipo:'info', texto:'Credênciais insuficientes para acesso!' };
-      }else{
-        this.getLista();
       }
     }
   }
