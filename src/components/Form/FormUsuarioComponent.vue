@@ -107,14 +107,22 @@ export default {
 
       if (this.operacao === "cadastro") this.$emit('cadastrar');
       else if (this.operacao === "edicao") this.$emit('edicao');
+    },
+
+    checkRoles(){
+      if (this.usuario.roles.includes('ROLE_USER')) this.roles.user = true;
+      if (this.usuario.roles.includes('ROLE_ADM')) this.roles.adm = true;
+    }
+  },
+
+  watch:{
+    usuario(){
+      this.checkRoles();
     }
   },
 
   beforeMount() {
-    if (this.usuario) {
-      if (this.usuario.roles.includes('ROLE_USER')) this.roles.user = true;
-      if (this.usuario.roles.includes('ROLE_ADM')) this.roles.adm = true;
-    }
+    if (this.usuario) this.checkRoles();
   }
 };
 </script>
