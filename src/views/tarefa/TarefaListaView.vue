@@ -75,7 +75,7 @@ export default {
         ApiTask.usuario.tarefas.getAll(this.user.id)
           .then(response => {
             this.listaTarefas = response.data;
-            if(this.listaTarefas.length == 0) this.setMensagem('Lista está vazia!', 'info', false);
+            if(this.listaTarefas.length == 0) this.mensagem = { show: true, tipo:'info' , texto: 'Lista está vazia!' };
           })
           .catch(error => console.error(error.message));
       };
