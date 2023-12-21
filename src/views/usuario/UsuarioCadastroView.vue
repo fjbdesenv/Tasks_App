@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <FormUsuarioComponent
-      :autenticado="autenticado"
-      :usuario="usuario" 
-      :mensagem="mensagem" 
-      operacao="cadastro"
-      @cadastrar="cadastrar()"
-    />
-  </div>
+  <FormUsuarioComponent
+    :autenticado="autenticado"
+    :usuario="usuario" 
+    :mensagem="mensagem" 
+    operacao="cadastro"
+    @cadastrar="cadastrar()"
+  />
 </template>
 
 <script>
