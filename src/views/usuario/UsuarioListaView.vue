@@ -26,7 +26,7 @@
           <td>{{ usuario.nome }}</td>
           <td>{{ usuario.email }}</td>
           <td>
-            <button class="btn btn-primary mx-2"> Editar </button>
+            <router-link :to="`/usuarios/edicao/${usuario._id}`" > <button class="btn btn-primary mx-2"> Editar </button> </router-link>
             <button class="btn btn-danger  mx-2" @click="deletar(usuario._id)"> Deletar </button>
           </td>
         </tr>
